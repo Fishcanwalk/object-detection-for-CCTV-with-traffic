@@ -1,0 +1,7 @@
+train: /content/drive/MyDrive/data/data_yolov8/v1/train
+val: /content/drive/MyDrive/data/data_yolov8/v1/valid
+test: /content/drive/MyDrive/data/testset/test4class
+
+nc: 4
+names: ['not_triplets', 'triplets', 'with-helmet', 'without-helmet']
+

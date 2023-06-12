@@ -1,0 +1,7 @@
+train :
+val :
+test: /content/drive/MyDrive/data/testset/test
+
+nc: 4
+names: ['not_ride_motorcycle','not_triplets', 'triplets', 'with-helmet', 'without-helmet']
+
