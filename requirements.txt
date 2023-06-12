@@ -1,7 +1,7 @@
 ultralytics
 matplotlib
 numpy
-opencv-python
+opencv-python-headless
 Pillow
 PyYAML
 requests
@@ -9,3 +9,4 @@ scipy
 torch
 torchvision
 tqdm
+streamlit
