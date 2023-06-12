@@ -1,12 +1,6 @@
 ultralytics
 matplotlib
-numpy
 opencv-python-headless
 Pillow
-PyYAML
-requests
-scipy
-torch
-torchvision
-tqdm
 streamlit
+temp
