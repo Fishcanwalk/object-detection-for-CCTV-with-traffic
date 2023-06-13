@@ -14,7 +14,7 @@ def ImgPre(m) :
       img = Image.open(image_file)
       col1, col2 = st.columns(2)
       with col1 :
-        st.image(img ,caption='Uploaded Image')
+        st.image(img ,caption='Uploaded Image',use_column_width='always')
 
       with st.spinner(text="Predicting..."):
         # Load model
@@ -24,7 +24,7 @@ def ImgPre(m) :
         
       with col2 :
         st.image(res_plotted, caption='Detected Image',
-            use_column_width=True,)
+            use_column_width='always',)
 
 
 def videoPre (m):
