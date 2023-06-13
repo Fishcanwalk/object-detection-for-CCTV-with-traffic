@@ -52,7 +52,7 @@ def videoPre (m):
                 res = m(image)
                 result_tensor = res[0].boxes
                 res_plotted = res[0].plot()
-                im = Image.fromarray(res_plotted)
+                im = Image.fromarray(res_plotted[:,:,::-1])
                 st_frame.image(res_plotted,
                                caption='Detected Video',
                                channels="BGR",
