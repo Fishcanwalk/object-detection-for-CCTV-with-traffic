@@ -12,18 +12,14 @@ def ImgPre(m) :
   image_file = st.file_uploader("Upload An Image", type=['png', 'jpeg', 'jpg'])
   if image_file is not None:
       img = Image.open(image_file)
-      col1, col2 = st.columns(2)
-      with col1 :
-        st.image(img ,caption='Uploaded Image',use_column_width='always')
+      st.image(img ,caption='Uploaded Image',use_column_width='always')
 
       with st.spinner(text="Predicting..."):
         # Load model
         pred = m(img,conf = 0.2)
         boxes = pred[0].boxes
         res_plotted = pred[0].plot()[:, :, ::-1]
-        
-      with col2 :
-        st.image(res_plotted, caption='Detected Image',
+       st.image(res_plotted, caption='Detected Image',
             use_column_width='always',)
 
 
