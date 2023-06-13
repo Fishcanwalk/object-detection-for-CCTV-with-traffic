@@ -19,7 +19,7 @@ def ImgPre(m) :
         pred = m(img,conf = 0.2)
         boxes = pred[0].boxes
         res_plotted = pred[0].plot()[:, :, ::-1]
-       st.image(res_plotted, caption='Detected Image')
+        st.image(res_plotted, caption='Detected Image')
 
 
 def videoPre (m):
