@@ -1,10 +1,10 @@
 import streamlit as st
 from PIL import Image
-from datetime import datetime
 from ultralytics import YOLO
 import cv2
-import os
 import tempfile
+import os
+import os.path as osp
 
 model = YOLO('my_modeln.pt')
 
@@ -32,6 +32,15 @@ def videoPre (m):
   if uploaded_video is not None:
       tfile = tempfile.NamedTemporaryFile(delete=False)
       tfile.write(uploaded_video.read())
+      video_name = uploaded_video.name
+      fn , file_extension = osp.splitext(video_name)
+      fn = ''.join(e for e in fn if e.isalnum()) + file_extension
+      outputpath = osp.join('data/video_output', fn)
+      
+      os.makedirs('data/video_frames', exist_ok=True)
+      frames_dir = osp.join('data/video_frames',''.join(e for e in video_name if e.isalnum()))
+      os.makedirs(frames_dir, exist_ok=True)
+      frame_count = 0
       if uploaded_video:
             st.video(tfile.name)
             vid_cap = cv2.VideoCapture(tfile.name)
@@ -39,19 +48,27 @@ def videoPre (m):
             while (vid_cap.isOpened()):
               success, image = vid_cap.read()
               if success:
-                image = cv2.resize(image, (720, int(720*(9/16))))
+                frame_count += 1
                 res = m(image)
                 result_tensor = res[0].boxes
                 res_plotted = res[0].plot()
+                im = Image.fromarray(res_plotted)
                 st_frame.image(res_plotted,
                                caption='Detected Video',
                                channels="BGR",
                                use_column_width=True
                                )
+                im.save(osp.join(frames_dir, f'{frame_count}.jpg'))
               else :
                  vid_cap.release()
                  break
-                  
+            print(frames_dir,outputpath)
+            os.system(
+            f' ffmpeg -framerate 30 -i {frames_dir}/%d.jpg -c:v libx264 -pix_fmt yuv420p {outputpath}') 
+            os.system(f'rm -rf {frames_dir}')
+            output_video = open(outputpath, 'rb')
+            output_video_bytes = output_video.read()
+            st.video(output_video_bytes)      
 
 
 def main() :
