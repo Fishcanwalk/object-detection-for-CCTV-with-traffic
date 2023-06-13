@@ -36,7 +36,7 @@ def videoPre (m):
       fn , file_extension = osp.splitext(video_name)
       fn = ''.join(e for e in fn if e.isalnum()) + file_extension
       outputpath = osp.join('data/video_output', fn)
-      
+      os.makedirs('data/video_output', exist_ok=True)
       os.makedirs('data/video_frames', exist_ok=True)
       frames_dir = osp.join('data/video_frames',''.join(e for e in video_name if e.isalnum()))
       os.makedirs(frames_dir, exist_ok=True)
