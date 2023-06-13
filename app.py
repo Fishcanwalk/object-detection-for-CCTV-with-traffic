@@ -18,7 +18,7 @@ def ImgPre(m) :
 
       with st.spinner(text="Predicting..."):
         # Load model
-        pred = m(img)
+        pred = m(img,conf = 0.2)
         boxes = pred[0].boxes
         res_plotted = pred[0].plot()[:, :, ::-1]
         
@@ -73,6 +73,7 @@ def videoPre (m):
 def main() :
 
   st.title('Deployment Ai builder')
+  st.title('object-detection-for-CCTV-with-traffic')
 
   with st.sidebar:
     st.title("Option")
