@@ -12,14 +12,14 @@ def ImgPre(m) :
   image_file = st.file_uploader("Upload An Image", type=['png', 'jpeg', 'jpg'])
   if image_file is not None:
       img = Image.open(image_file)
-      st.image(img ,caption='Uploaded Image',use_column_width='always')
+      st.image(img ,caption='Uploaded Image')
 
       with st.spinner(text="Predicting..."):
         # Load model
         pred = m(img,conf = 0.2)
         boxes = pred[0].boxes
         res_plotted = pred[0].plot()[:, :, ::-1]
-       st.image(res_plotted, caption='Detected Image', use_column_width='always')
+       st.image(res_plotted, caption='Detected Image')
 
 
 def videoPre (m):
