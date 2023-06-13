@@ -62,7 +62,6 @@ def videoPre (m):
               else :
                  vid_cap.release()
                  break
-            print(frames_dir,outputpath)
             os.system(
             f' ffmpeg -framerate 30 -i {frames_dir}/%d.jpg -c:v libx264 -pix_fmt yuv420p {outputpath}') 
             os.system(f'rm -rf {frames_dir}')
