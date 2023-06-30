@@ -12,19 +12,14 @@ def ImgPre(m) :
   image_file = st.file_uploader("Upload An Image", type=['png', 'jpeg', 'jpg'])
   if image_file is not None:
       img = Image.open(image_file)
-      col1, col2 = st.columns(2)
-      with col1 :
-        st.image(img ,caption='Uploaded Image')
+      st.image(img ,caption='Uploaded Image')
 
       with st.spinner(text="Predicting..."):
         # Load model
-        pred = m(img)
+        pred = m(img,conf = 0.2)
         boxes = pred[0].boxes
         res_plotted = pred[0].plot()[:, :, ::-1]
-        
-      with col2 :
-        st.image(res_plotted, caption='Detected Image',
-            use_column_width=True,)
+        st.image(res_plotted, caption='Detected Image')
 
 
 def videoPre (m):
@@ -36,7 +31,7 @@ def videoPre (m):
       fn , file_extension = osp.splitext(video_name)
       fn = ''.join(e for e in fn if e.isalnum()) + file_extension
       outputpath = osp.join('data/video_output', fn)
-      
+      os.makedirs('data/video_output', exist_ok=True)
       os.makedirs('data/video_frames', exist_ok=True)
       frames_dir = osp.join('data/video_frames',''.join(e for e in video_name if e.isalnum()))
       os.makedirs(frames_dir, exist_ok=True)
@@ -52,7 +47,7 @@ def videoPre (m):
                 res = m(image)
                 result_tensor = res[0].boxes
                 res_plotted = res[0].plot()
-                im = Image.fromarray(res_plotted)
+                im = Image.fromarray(res_plotted[:,:,::-1])
                 st_frame.image(res_plotted,
                                caption='Detected Video',
                                channels="BGR",
@@ -62,7 +57,6 @@ def videoPre (m):
               else :
                  vid_cap.release()
                  break
-            print(frames_dir,outputpath)
             os.system(
             f' ffmpeg -framerate 30 -i {frames_dir}/%d.jpg -c:v libx264 -pix_fmt yuv420p {outputpath}') 
             os.system(f'rm -rf {frames_dir}')
@@ -74,6 +68,7 @@ def videoPre (m):
 def main() :
 
   st.title('Deployment Ai builder')
+  st.title('object-detection-for-CCTV-with-traffic')
 
   with st.sidebar:
     st.title("Option")
