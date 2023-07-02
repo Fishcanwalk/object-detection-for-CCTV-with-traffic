@@ -5,7 +5,8 @@ import cv2
 import tempfile
 import os
 import os.path as osp
-model = YOLO('my_modeln.pt')
+
+
 def ImgPre(m) :
   image_file = st.file_uploader("Upload An Image", type=['png', 'jpeg', 'jpg'])
   if image_file is not None:
@@ -42,7 +43,8 @@ def videoPre (m):
               if success:
                 frame_count += 1
                 res = m(image)
-                result_tensor = res[0].boxes
+                result_tensor = res[0].boxestorch.hub.load('ultralytics/yolov5', 'custom',
+                           path=CFG_MODEL_PATH, force_reload=True, device=device)
                 res_plotted = res[0].plot()
                 im = Image.fromarray(res_plotted[:,:,::-1])
                 st_frame.image(res_plotted,
@@ -51,7 +53,8 @@ def videoPre (m):
                                use_column_width=True
                                )
                 im.save(osp.join(frames_dir, f'{frame_count}.jpg'))
-              else :
+              else :torch.hub.load('ultralytics/yolov5', 'custom',
+                           path=CFG_MODEL_PATH, force_reload=True, device=device)
                  vid_cap.release()
                  break
             os.system(
@@ -59,20 +62,31 @@ def videoPre (m):
             os.system(f'rm -rf {frames_dir}')
             output_video = open(outputpath, 'rb')
             output_video_bytes = output_video.read()
-            st.video(output_video_bytes)      
+            st.video(output_video_bytes)
+        
 def main() :
   st.title('Deployment Ai builder')
   st.title('object-detection-for-CCTV-with-traffic')
   with st.sidebar:
     st.title("Option")
     option = st.selectbox('How would you like to be contacted?',('Image', 'Video'))
+    st.title("Select Model")
+    option = st.selectbox('How would you like to be contacted?',('Model v5', 'Model v8')) 
+    
   if option == 'Video' :
     st.write('Using video upload option')
   else :
     st.write('Using image upload option')
+    
   if option == 'Image':
+    if Select == 'Model v5'
+      model = torch.hub.load('ultralytics/yolov5', 'custom',
+                           path='mymodelv5.pt', force_reload=True)
+    else:
+      model = YOLO('my_modeln.pt')
     ImgPre(model) 
   else :
     videoPre(model)
+    
 if __name__ == "__main__":
   main()
