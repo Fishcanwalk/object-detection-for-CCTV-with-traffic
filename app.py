@@ -10,8 +10,7 @@ import torch
 
 
 
-def ImgPre(m) :
-  image_file = st.file_uploader("Upload An Image", type=['png', 'jpeg', 'jpg'])
+def ImgPre(m , image_file) :
   if image_file is not None:
       img = Image.open(image_file)
       st.image(img ,caption='Uploaded Image')
@@ -84,13 +83,14 @@ def main() :
     st.write('Using image upload option')
 
   if option == 'Image':
+    imf = st.file_uploader("Upload An Image", type=['png', 'jpeg', 'jpg'])
     if option == 'Model n' :
       st.write('Using Model n')
       model = torch.hub.load('ultralytics/yolov5','custom',path = 'mymodelv5.pt',force_reload=True)
     else :
       st.write('Using image Model x')
       model = YOLO('my_modeln.pt')
-    ImgPre(model) 
+    ImgPre(model,imf) 
   else :
     if option == 'Model n' :
       st.write('Using Model n')
