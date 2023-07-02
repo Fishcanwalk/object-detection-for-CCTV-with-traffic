@@ -10,7 +10,8 @@ import torch
 
 
 
-def ImgPre(m , image_file) :
+def ImgPre(m , imfs) :
+  image_file = st.file_uploader("Upload An Image", type=['png', 'jpeg', 'jpg'])
   if image_file is not None:
       img = Image.open(image_file)
       st.image(img ,caption='Uploaded Image')
@@ -60,7 +61,7 @@ def videoPre (m):
                  break
             os.system(
             f' ffmpeg -framerate 30 -i {frames_dir}/%d.jpg -c:v libx264 -pix_fmt yuv420p {outputpath}') 
-            os.system(f'rm -rf {frames_dir}')
+            os.system(f'rm -rf {frames_dir}imf = st.file_uploader("Upload An Image", type=['png', 'jpeg', 'jpg'])')
             output_video = open(outputpath, 'rb')
             output_video_bytes = output_video.read()
             st.video(output_video_bytes)      
@@ -90,7 +91,7 @@ def main() :
     else :
       st.write('Using image Model x')
       model = YOLO('my_modeln.pt')
-    ImgPre(model,imf) 
+    ImgPre(model,imfs) 
   else :
     if option == 'Model n' :
       st.write('Using Model n')
