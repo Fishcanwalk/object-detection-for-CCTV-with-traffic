@@ -78,7 +78,7 @@ def main() :
     st.write('Using image upload option')
     
   if option == 'Image':
-    if Select == 'Model-v5'
+    if Select == 'Model-v5':
       model = torch.hub.load('ultralytics/yolov5', 'custom',
                            path='mymodelv5.pt', force_reload=True)
     else:
