@@ -51,7 +51,7 @@ def videoPre (m):
                                caption='Detected Video',
                                channels="BGR",
                                use_column_width=True
-                               )
+                               )Error: This app has encountered an error. The original error message is redacted to prevent data leaks. Full error details have been recorded in the logs (if you're on Streamlit Cloud, click on 'Manage app' in the lower right of your app).
                 im.save(osp.join(frames_dir, f'{frame_count}.jpg'))
               else :
                  vid_cap.release()
@@ -69,7 +69,7 @@ st.title('object-detection-for-CCTV-with-traffic')
 with st.sidebar:
   st.title("Option")
   option = st.selectbox('How would you like to be contacted?',('Image', 'Video'))
-  st.title("Select Model")
+  st.title("Select_Model")
   option = st.selectbox('How would you like to be contacted?',('Model-v5', 'Model-v8')) 
     
 if option == 'Video' :
@@ -78,14 +78,14 @@ else :
   st.write('Using image upload option')
     
 if option == 'Image':
-  if Select == 'Model-v5':
+  if Select_Model == 'Model-v5':
     model = torch.hub.load('ultralytics/yolov5', 'custom',
                            path='mymodelv5.pt', force_reload=True)
   else:
     model = YOLO('my_modeln.pt')
   ImgPre(model) 
 else :
-  if Select == 'Model-v5':
+  if Select_Model == 'Model-v5':
     model = torch.hub.load('ultralytics/yolov5', 'custom',
                            path='mymodelv5.pt', force_reload=True)
   else:
