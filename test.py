@@ -6,6 +6,32 @@ import tempfile
 import os
 import os.path as osp
 
+st.title('Deployment Ai builder')
+st.title('object-detection-for-CCTV-with-traffic')
+with st.sidebar:
+  st.title("Option")
+  option = st.selectbox('How would you like to be contacted?',('Image', 'Video'))
+  st.title("Select_Model")
+  option = st.selectbox('How would you like to be contacted?',('Model-v5', 'Model-v8')) 
+    
+if option == 'Video' :
+  st.write('Using video upload option')
+else :
+  st.write('Using image upload option')
+    
+if option == 'Image':
+  if Select_Model == 'Model-v5':
+    model = torch.hub.load('ultralytics/yolov5', 'custom',
+                           path='mymodelv5.pt', force_reload=True)
+  else:
+    model = YOLO('my_modeln.pt')
+  ImgPre(model) 
+else :
+  if Select_Model == 'Model-v5':
+    model = torch.hub.load('ultralytics/yolov5', 'custom',
+                           path='mymodelv5.pt', force_reload=True)
+  else:
+    model = YOLO('my_modeln.pt')
 
 def ImgPre(m) :
   image_file = st.file_uploader("Upload An Image", type=['png', 'jpeg', 'jpg'])
@@ -64,32 +90,7 @@ def videoPre (m):
             st.video(output_video_bytes)
         
 
-st.title('Deployment Ai builder')
-st.title('object-detection-for-CCTV-with-traffic')
-with st.sidebar:
-  st.title("Option")
-  option = st.selectbox('How would you like to be contacted?',('Image', 'Video'))
-  st.title("Select_Model")
-  option = st.selectbox('How would you like to be contacted?',('Model-v5', 'Model-v8')) 
-    
-if option == 'Video' :
-  st.write('Using video upload option')
-else :
-  st.write('Using image upload option')
-    
-if option == 'Image':
-  if Select_Model == 'Model-v5':
-    model = torch.hub.load('ultralytics/yolov5', 'custom',
-                           path='mymodelv5.pt', force_reload=True)
-  else:
-    model = YOLO('my_modeln.pt')
-  ImgPre(model) 
-else :
-  if Select_Model == 'Model-v5':
-    model = torch.hub.load('ultralytics/yolov5', 'custom',
-                           path='mymodelv5.pt', force_reload=True)
-  else:
-    model = YOLO('my_modeln.pt')
+
   videoPre(model)
     
 
