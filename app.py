@@ -5,22 +5,18 @@ import cv2
 import tempfile
 import os
 import os.path as osp
-import torch
-
-
-
-
+model = YOLO('my_modeln.pt')
 def ImgPre(m) :
   image_file = st.file_uploader("Upload An Image", type=['png', 'jpeg', 'jpg'])
   if image_file is not None:
       img = Image.open(image_file)
       st.image(img ,caption='Uploaded Image')
-
       with st.spinner(text="Predicting..."):
         # Load model
         pred = m(img,conf = 0.2)
         boxes = pred[0].boxes
         res_plotted = pred[0].plot()[:, :, ::-1]
+       st.image(res_plotted, caption='Detected Image')
         st.image(res_plotted, caption='Detected Image')
 
 
@@ -56,7 +52,7 @@ def videoPre (m):
                                use_column_width=True
                                )
                 im.save(osp.join(frames_dir, f'{frame_count}.jpg'))
-              else :imf = st.file_uploader("Upload An Image", type=['png', 'jpeg', 'jpg'])
+              else :
                  vid_cap.release()
                  break
             os.system(
@@ -65,40 +61,19 @@ def videoPre (m):
             output_video = open(outputpath, 'rb')
             output_video_bytes = output_video.read()
             st.video(output_video_bytes)      
-model = torch.hub.load('ultralytics/yolov5','custom',path = 'mymodelv5.pt',force_reload=True)
-
 def main() :
-
   st.title('Deployment Ai builder')
   st.title('object-detection-for-CCTV-with-traffic')
-
   with st.sidebar:
     st.title("Option")
     option = st.selectbox('How would you like to be contacted?',('Image', 'Video'))
-    st.title("Select model")
-    option = st.selectbox('How would you like to be contacted?',('Model n', 'Model x'))
-
   if option == 'Video' :
     st.write('Using video upload option')
-  else :
+  else :*
     st.write('Using image upload option')
-
   if option == 'Image':
-    if option == 'Model n' :
-      st.write('Using Model n')
-      model = torch.hub.load('ultralytics/yolov5','custom',path = 'mymodelv5.pt',force_reload=True)
-    else :
-      st.write('Using image Model x')
-      model = YOLO('my_modeln.pt')
     ImgPre(model) 
   else :
-    if option == 'Model n' :
-      st.write('Using Model n')
-      #model = torch.hub.load('ultralytics/yolov5','custom',path = 'mymodelv5.pt',force_reload=True)
-    else :
-      st.write('Using image Model x')
-      model = YOLO('my_modeln.pt')
     videoPre(model)
-
-if __name__ == '__main__':
-    main()
+if __name__ == "__main__":
+  main()
