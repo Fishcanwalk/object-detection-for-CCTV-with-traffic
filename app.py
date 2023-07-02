@@ -68,7 +68,7 @@ def main() :
     option = st.selectbox('How would you like to be contacted?',('Image', 'Video'))
   if option == 'Video' :
     st.write('Using video upload option')
-  else :*
+  else :
     st.write('Using image upload option')
   if option == 'Image':
     ImgPre(model) 
