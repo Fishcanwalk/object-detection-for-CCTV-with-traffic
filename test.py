@@ -63,7 +63,7 @@ def videoPre (m):
             output_video_bytes = output_video.read()
             st.video(output_video_bytes)
         
-def main() :
+
   st.title('Deployment Ai builder')
   st.title('object-detection-for-CCTV-with-traffic')
   with st.sidebar:
@@ -87,5 +87,4 @@ def main() :
   else :
     videoPre(model)
     
-if __name__ == "__main__":
-  main()
+
