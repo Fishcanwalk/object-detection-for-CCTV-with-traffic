@@ -64,7 +64,7 @@ def videoPre (m):
             output_video = open(outputpath, 'rb')
             output_video_bytes = output_video.read()
             st.video(output_video_bytes)      
-
+model = torch.hub.load('ultralytics/yolov5','custom',path = 'mymodelv5.pt',force_reload=True)
 
 def main() :
 
@@ -94,7 +94,7 @@ def main() :
   else :
     if option == 'Model n' :
       st.write('Using Model n')
-      model = torch.hub.load('ultralytics/yolov5','custom',path = 'mymodelv5.pt',force_reload=True)
+      #model = torch.hub.load('ultralytics/yolov5','custom',path = 'mymodelv5.pt',force_reload=True)
     else :
       st.write('Using image Model x')
       model = YOLO('my_modeln.pt')
