@@ -53,8 +53,7 @@ def videoPre (m):
                                use_column_width=True
                                )
                 im.save(osp.join(frames_dir, f'{frame_count}.jpg'))
-              else :torch.hub.load('ultralytics/yolov5', 'custom',
-                           path=CFG_MODEL_PATH, force_reload=True, device=device)
+              else :
                  vid_cap.release()
                  break
             os.system(
