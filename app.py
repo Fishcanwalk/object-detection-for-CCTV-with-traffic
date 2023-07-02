@@ -6,7 +6,8 @@ import tempfile
 import os
 import os.path as osp
 
-model = YOLO('my_modeln.pt')
+
+
 
 def ImgPre(m) :
   image_file = st.file_uploader("Upload An Image", type=['png', 'jpeg', 'jpg'])
@@ -73,11 +74,20 @@ def main() :
   with st.sidebar:
     st.title("Option")
     option = st.selectbox('How would you like to be contacted?',('Image', 'Video'))
+    st.title("Select model")
+    option = st.selectbox('How would you like to be contacted?',('Model n', 'Model x'))
 
   if option == 'Video' :
     st.write('Using video upload option')
   else :
     st.write('Using image upload option')
+
+  if option == 'Model n' :
+    st.write('Using Model n')
+    model = torch.hub.load('ultralytics/yolov5', 'mymodelv5.pt', force_reload=True)
+  else :
+    st.write('Using image Model x')
+    model = YOLO('my_modeln.pt')
 
   if option == 'Image':
     ImgPre(model) 
