@@ -85,6 +85,11 @@ if option == 'Image':
     model = YOLO('my_modeln.pt')
   ImgPre(model) 
 else :
+  if Select == 'Model-v5':
+    model = torch.hub.load('ultralytics/yolov5', 'custom',
+                           path='mymodelv5.pt', force_reload=True)
+  else:
+    model = YOLO('my_modeln.pt')
   videoPre(model)
     
 
