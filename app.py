@@ -83,13 +83,6 @@ def main() :
   else :
     st.write('Using image upload option')
 
-  if option == 'Model n' :
-    st.write('Using Model n')
-    model = torch.hub.load('ultralytics/yolov5','custom',path = 'mymodelv5.pt',force_reload=True)
-  else :
-    st.write('Using image Model x')
-    model = YOLO('my_modeln.pt')
-
   if option == 'Image':
     if option == 'Model n' :
       st.write('Using Model n')
