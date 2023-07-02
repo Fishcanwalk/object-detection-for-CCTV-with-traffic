@@ -10,7 +10,7 @@ import torch
 
 
 
-def ImgPre(m , imfs) :
+def ImgPre(m) :
   image_file = st.file_uploader("Upload An Image", type=['png', 'jpeg', 'jpg'])
   if image_file is not None:
       img = Image.open(image_file)
@@ -56,12 +56,12 @@ def videoPre (m):
                                use_column_width=True
                                )
                 im.save(osp.join(frames_dir, f'{frame_count}.jpg'))
-              else :
+              else :imf = st.file_uploader("Upload An Image", type=['png', 'jpeg', 'jpg'])
                  vid_cap.release()
                  break
             os.system(
             f' ffmpeg -framerate 30 -i {frames_dir}/%d.jpg -c:v libx264 -pix_fmt yuv420p {outputpath}') 
-            os.system(f'rm -rf {frames_dir}imf = st.file_uploader("Upload An Image", type=['png', 'jpeg', 'jpg'])')
+            os.system(f'rm -rf {frames_dir}')
             output_video = open(outputpath, 'rb')
             output_video_bytes = output_video.read()
             st.video(output_video_bytes)      
@@ -84,14 +84,13 @@ def main() :
     st.write('Using image upload option')
 
   if option == 'Image':
-    imf = st.file_uploader("Upload An Image", type=['png', 'jpeg', 'jpg'])
     if option == 'Model n' :
       st.write('Using Model n')
       model = torch.hub.load('ultralytics/yolov5','custom',path = 'mymodelv5.pt',force_reload=True)
     else :
       st.write('Using image Model x')
       model = YOLO('my_modeln.pt')
-    ImgPre(model,imfs) 
+    ImgPre(model) 
   else :
     if option == 'Model n' :
       st.write('Using Model n')
