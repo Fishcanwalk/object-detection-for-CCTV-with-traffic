@@ -32,6 +32,7 @@ else :
                            path='mymodelv5.pt', force_reload=True)
   else:
     model = YOLO('my_modeln.pt')
+  videoPre(model)
 
 def ImgPre(m) :
   image_file = st.file_uploader("Upload An Image", type=['png', 'jpeg', 'jpg'])
@@ -90,7 +91,5 @@ def videoPre (m):
             st.video(output_video_bytes)
         
 
-
-  videoPre(model)
     
 
