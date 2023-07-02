@@ -5,6 +5,7 @@ import cv2
 import tempfile
 import os
 import os.path as osp
+import torch
 
 model = torch.hub.load('ultralytics/yolov5', 'custom',
                            path='mymodelv5.pt', force_reload=True)
