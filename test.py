@@ -64,7 +64,7 @@ def videoPre (m):
             st.video(output_video_bytes)
         
 
-  st.title('Deployment Ai builder')
+st.title('Deployment Ai builder')
   st.title('object-detection-for-CCTV-with-traffic')
   with st.sidebar:
     st.title("Option")
