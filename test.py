@@ -70,7 +70,7 @@ def main() :
     st.title("Option")
     option = st.selectbox('How would you like to be contacted?',('Image', 'Video'))
     st.title("Select Model")
-    option = st.selectbox('How would you like to be contacted?',('Model v5', 'Model v8')) 
+    option = st.selectbox('How would you like to be contacted?',('Model-v5', 'Model-v8')) 
     
   if option == 'Video' :
     st.write('Using video upload option')
@@ -78,7 +78,7 @@ def main() :
     st.write('Using image upload option')
     
   if option == 'Image':
-    if Select == 'Model v5'
+    if Select == 'Model-v5'
       model = torch.hub.load('ultralytics/yolov5', 'custom',
                            path='mymodelv5.pt', force_reload=True)
     else:
