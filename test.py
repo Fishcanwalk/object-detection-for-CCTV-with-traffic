@@ -65,7 +65,6 @@ def videoPre (m):
             output_video_bytes = output_video.read()
             st.video(output_video_bytes)      
 def main() :
-  st.title('Deployment Ai builder')
   st.title('Smort-CCTV')
   with st.sidebar:
     st.title("Option")
