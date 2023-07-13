@@ -66,7 +66,7 @@ def videoPre (m):
             st.video(output_video_bytes)      
 def main() :
   st.title('Deployment Ai builder')
-  st.title('object-detection-for-CCTV-with-traffic')
+  st.title('Smort-CCTV')
   with st.sidebar:
     st.title("Option")
     option = st.selectbox('How would you like to be contacted?',('Image', 'Video'))
