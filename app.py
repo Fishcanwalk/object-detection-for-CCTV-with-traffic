@@ -5,15 +5,12 @@ import cv2
 import tempfile
 import os
 import os.path as osp
-
 model = YOLO('my_modeln.pt')
-
 def ImgPre(m) :
   image_file = st.file_uploader("Upload An Image", type=['png', 'jpeg', 'jpg'])
   if image_file is not None:
       img = Image.open(image_file)
       st.image(img ,caption='Uploaded Image')
-
       with st.spinner(text="Predicting..."):
         # Load model
         pred = m(img,conf = 0.2)
@@ -63,26 +60,18 @@ def videoPre (m):
             output_video = open(outputpath, 'rb')
             output_video_bytes = output_video.read()
             st.video(output_video_bytes)      
-
-
 def main() :
-
-  st.title('Deployment Ai builder')
-  st.title('object-detection-for-CCTV-with-traffic')
-
+  st.title('Smort-CCTV')
   with st.sidebar:
     st.title("Option")
     option = st.selectbox('How would you like to be contacted?',('Image', 'Video'))
-
   if option == 'Video' :
     st.write('Using video upload option')
   else :
     st.write('Using image upload option')
-
   if option == 'Image':
     ImgPre(model) 
   else :
     videoPre(model)
-
-if __name__ == '__main__':
-    main()
+if __name__ == "__main__":
+  main()
